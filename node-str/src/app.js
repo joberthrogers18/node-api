@@ -1,42 +1,18 @@
-'user strict'
+'user strict';
 
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const router = express.Router();
 
 app.use(bodyParser.json()); // all content became json
 app.use(bodyParser.urlencoded({extended: false})); //codify the urls
 
+// Load Routes
+const indexRoute = require('./routes/index-route');
+const productRoute = require('./routes/product-route');
 
-const route = router.get('/', (req, res, next)=>{
-    res.status(200).send({
-        title: "Node Store API",
-        version: "0.0.1"
-    });
-});
-
-const create = router.post('/', (req, res, next)=>{
-    res.status(201).send(req.body); //status code 201 for create
-});
-
-const put = router.put('/:id', (req, res, next)=>{ // update
-    const id = req.params.id;
-    res.status(200).send({
-        id: id,
-        item: req.body
-    }); 
-});
-
-const del = router.delete('/', (req, res, next)=>{
-    res.status(200).send(req.body); //delete
-});
-
-
-app.use('/', route);
-app.use('/products', create);
-app.use('/products', put);
-app.use('/products', del);
+app.use('/', indexRoute);
+app.use('/products', productRoute); // Load the put, create and delete from routes 
 
 module.exports = app;
