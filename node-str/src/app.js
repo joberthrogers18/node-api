@@ -15,13 +15,13 @@ app.use(bodyParser.urlencoded({extended: false})); //codify the urls
 
 
 //Load Models
-const Product = require('./models/products');
+const Vehicles = require('./models/vehicle');
 
 // Load Routes
 const indexRoute = require('./routes/index-route');
-const productRoute = require('./routes/product-route');
+const vehiclesRoute = require('./routes/vehicle-route');
 
 app.use('/', indexRoute);
-app.use('/products', productRoute); // Load the put, create and delete from routes 
+app.use('/vehicle', vehiclesRoute); // Load the put, create and delete from routes 
 
 module.exports = app;
